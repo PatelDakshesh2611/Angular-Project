@@ -1,0 +1,15 @@
+/* product.component.css */
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between product cards */
+    justify-content: space-around; /* Adjust alignment of items */
+  }
+  
+  @media (max-width: 768px) {
+    .product-list {
+      justify-content: center; /* Center items on smaller screens */
+    }
+  }
+  

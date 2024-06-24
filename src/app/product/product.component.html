@@ -1,0 +1,4 @@
+<!-- product.component.html -->
+<div class="product-list">
+  <app-product-card *ngFor="let product of products" [product]="product" (addToCartClick)="addToCart($event)"></app-product-card>
+</div>
