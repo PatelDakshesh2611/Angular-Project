@@ -1,0 +1,33 @@
+<!-- src/app/checkout/checkout.component.html -->
+<div class="checkout-container">
+    <h1 class="checkout-heading">Order Summary</h1>
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="!loading && products.length > 0">
+      <mat-card *ngFor="let product of products" class="product-summary-card">
+        <div class="product-summary-details">
+          <h3>{{ product.title }}</h3>
+          <p>Price: {{ product.price | currency }}</p>
+          <p>Quantity: {{ product.quantity }}</p>
+          <p>Total: {{ product.price * product.quantity | currency }}</p>
+        </div>
+      </mat-card>
+      <div class="total-price">
+        <h2>Total Price: {{ getTotalPrice() | currency }}</h2>
+      </div>
+      <div class="payment-options">
+        <mat-radio-group [(ngModel)]="selectedPaymentOption">
+          <mat-radio-button value="cod">Cash on Delivery</mat-radio-button>
+          <mat-radio-button value="card">Credit/Debit Card</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="order-button-container">
+        <button mat-raised-button color="primary" (click)="placeOrder()">Place Order</button>
+      </div>
+    </div>
+    <div *ngIf="!loading && products.length === 0">
+      <p>Your cart is empty.</p>
+    </div>
+  </div>
+  

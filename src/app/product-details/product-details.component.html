@@ -1,0 +1,41 @@
+<div *ngIf="loading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loading && product" class="product-details">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ product.title }}</mat-card-title>
+      <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="product.thumbnail" alt="{{ product.title }}">
+    <mat-card-content>
+      <p>{{ product.description }}</p>
+      <p><strong>Price: </strong>${{ product.price }}</p>
+      <p><strong>Rating: </strong>
+        <span *ngFor="let star of getStars(product.rating? product.rating : 0)">
+
+          <mat-icon>star</mat-icon>
+        </span> 
+        ({{ product.rating }})
+      </p>
+      <div class="quantity-control">
+        <button mat-mini-fab color="primary" (click)="decrementQuantity()" class="quantity-button">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <span>{{ quantity }}</span>
+        <button mat-mini-fab color="primary" (click)="incrementQuantity()" class="quantity-button">
+          <mat-icon>add</mat-icon>
+        </button>
+        <mat-card-actions>
+          <button (click)="addToCart()" mat-raised-button color="primary">Add to Cart</button>
+        </mat-card-actions>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-list>
+      <mat-list-item *ngFor="let tag of product.tags">{{ tag }}</mat-list-item>
+    </mat-list>
+    
+  </mat-card>
+</div>

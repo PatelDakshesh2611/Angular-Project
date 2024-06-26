@@ -1,0 +1,33 @@
+/* src/app/cart/cart.component.css */
+.cart-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cart-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.empty-cart {
+  text-align: center;
+}
+
+.total-amount {
+  text-align: right;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.checkout-button-container {
+  text-align: center;
+  margin-top: 20px;
+}

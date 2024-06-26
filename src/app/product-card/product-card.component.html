@@ -1,5 +1,4 @@
-<!-- product-card.component.html -->
-<div class="product-card">
+<div class="product-card" (click)="onProductClick()">
   <div class="product-thumbnail">
     <img [src]="product.thumbnail" alt="Product Image">
   </div>
@@ -7,6 +6,6 @@
     <h3>{{ product.title }}</h3>
     <p class="description">{{ product.description | slice:0:50 }}{{ product.description.length > 50 ? '...' : '' }}</p>
     <p>Price: {{ product.price | currency }}</p>
-    <button class="add-to-cart-btn" (click)="onAddToCartClick()">Add to Cart</button>
+    <button class="add-to-cart-btn" (click)="onAddToCartClick($event)">Add to Cart</button>
   </div>
 </div>

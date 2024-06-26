@@ -1,0 +1,16 @@
+<!-- src/app/cart-card/cart-card.component.html -->
+<mat-card class="cart-card">
+    <div class="cart-card-content">
+      <img class="product-image" [src]="product.images[0]" alt="Product Image">
+      <div class="product-details">
+        <h3>{{ product.title }}</h3>
+        <p class="description">{{ product.description | slice:0:50 }}{{ product.description.length > 50 ? '...' : '' }}</p>
+        <p>Price: {{ product.price | currency }}</p>
+        <p>Quantity: {{ product.quantity }}</p>
+      </div>
+      <div class="actions">
+        <button mat-raised-button color="warn" (click)="onRemoveProduct()">Remove</button>
+      </div>
+    </div>
+  </mat-card>
+  
