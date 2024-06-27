@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import axios from 'axios';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,11 +42,12 @@ export class ProductDetailsComponent implements OnInit {
   };
   loading: boolean = true;
   quantity: number = 1;
-  
-  
+
+
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -77,18 +78,23 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
   addToCart() {
-    
-    this.productService.addToCart(this.product, this.quantity)
-      .subscribe(
-        (response) => {
-          console.log('Product added to cart:', response);
-          // Handle success, e.g., show a success message or update UI
-        },
-        (error) => {
-          console.error('Error adding to cart:', error);
-          // Handle error, e.g., show an error message
-        }
-      );
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.productService.addToCart(this.product, this.quantity)
+        .subscribe(
+          (response) => {
+            console.log('Product added to cart:', response);
+            // Handle success, e.g., show a success message or update UI
+          },
+          (error) => {
+            console.error('Error adding to cart:', error);
+            // Handle error, e.g., show an error message
+          }
+        );
+    } else {
+      alert('Please sign up or log in to add products to the cart.');
+      this.router.navigate(['/login']);
+    }
   }
   getStars(rating: number): string[] {
     return Array(Math.round(rating)).fill('star');

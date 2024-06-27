@@ -1,0 +1,42 @@
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.heading h1 {
+  font-weight: bold;
+  color: #ff6347;
+  margin-bottom: 20px;
+}
+
+.subtitle h2 {
+  color: #4682b4;
+  margin-top: 20px;
+}
+
+.image-container img {
+  margin-top: 40px;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.why-shop h3 {
+  color: #32cd32;
+  margin-top: 40px;
+}
+
+.customer-satisfaction h3 {
+  color: #ffa500;
+  margin-top: 40px;
+}

@@ -1,23 +1,27 @@
-<!-- src/app/cart/cart.component.html -->
 <div class="cart-container">
   <h1 class="cart-heading">Your Cart</h1>
+
   <div *ngIf="loading" class="loading-container">
-    <mat-spinner></mat-spinner>
+    <mat-spinner diameter="50"></mat-spinner>
   </div>
+
   <div *ngIf="!loading && products.length === 0" class="empty-cart">
     <p>Your cart is empty.</p>
   </div>
-  <div *ngIf="!loading && products.length > 0">
+
+  <div *ngIf="!loading && products.length > 0" class="cart-items">
     <app-cart-card
       *ngFor="let product of products"
       [product]="product"
       (removeProduct)="removeProduct($event)">
     </app-cart-card>
+
     <div class="total-amount">
       <h2>Total Amount: {{ getTotalPrice() | currency }}</h2>
     </div>
+
     <div class="checkout-button-container">
-      <button mat-raised-button color="primary" (click)="onCheckout()">Proceed to Checkout</button>
+      <button mat-raised-button color="primary" class="button" (click)="onCheckout()">Proceed to Checkout</button>
     </div>
   </div>
 </div>

@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, MatCardModule],
+  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, MatCardModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -17,45 +19,40 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
-  emailError: string = '';
-  passwordError: string = '';
 
-  constructor(private authService: AuthService) {}
-  
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {}
+
   async onLogin() {
     try {
-      // Reset error messages
-    this.errorMessage = '';
-    this.emailError = '';
-    this.passwordError = '';
+      this.errorMessage = '';
+      if (!this.email || !this.password) {
+        this.errorMessage = 'Please fill out all required fields.';
+        return;
+      }
 
-    // Validate email
-    if (!this.email) {
-      this.errorMessage = 'Email is required';
-    } else if (!this.isValidEmail(this.email)) {
-      this.errorMessage = 'Invalid email format';
-    }
+      if (!this.isValidEmail(this.email)) {
+        this.errorMessage = 'Invalid email format.';
+        return;
+      }
 
-    // Validate password
-    if (!this.password) {
-      this.errorMessage = 'Password is required';
-    } else if (this.password.length < 6) {
-      this.errorMessage = 'Password must be at least 6 characters';
-    }
+      if (this.password.length < 6) {
+        this.errorMessage = 'Password must be at least 6 characters long.';
+        return;
+      }
 
-    // Perform login if no validation errors
-    if (!this.emailError && !this.passwordError && !this.errorMessage) {
       const response = await this.authService.login(this.email, this.password);
       console.log('Login successful:', response);
-    }
-      // Handle successful login, e.g., store token, redirect to dashboard
-    } catch (error:any) {
+      this.snackBar.open('Login successful!', 'Close', {
+        duration: 3000,
+      });
+      this.router.navigate(['/products']);
+    } catch (error: any) {
       this.errorMessage = error.error;
       console.error('Login failed:', error);
     }
   }
+
   isValidEmail(email: string): boolean {
-    // Basic email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }

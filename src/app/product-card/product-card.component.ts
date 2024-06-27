@@ -30,7 +30,13 @@ export class ProductCardComponent {
 
   onAddToCartClick(event: Event) {
     event.stopPropagation();
-    this.addToCartClick.emit(this.product);
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.addToCartClick.emit(this.product);
+    } else {
+      alert('Please sign up or log in to add products to the cart.');
+      this.router.navigate(['/login']);
+    }
   }
 
   onProductClick() {

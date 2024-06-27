@@ -1,33 +1,61 @@
-/* src/app/cart/cart.component.css */
 .cart-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cart-heading {
-  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
   margin-bottom: 20px;
+  color: #333;
+  text-align: center;
 }
 
 .loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin-top: 50px;
 }
 
 .empty-cart {
   text-align: center;
+  margin-top: 50px;
+  color: #666;
+}
+
+.cart-items {
+  margin-top: 20px;
 }
 
 .total-amount {
-  text-align: right;
   margin-top: 20px;
-  font-weight: bold;
+  text-align: right;
 }
 
 .checkout-button-container {
-  text-align: center;
   margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #533CE8;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .cart-container {
+    padding: 10px;
+  }
+
+  .button {
+    font-size: 14px;
+  }
 }

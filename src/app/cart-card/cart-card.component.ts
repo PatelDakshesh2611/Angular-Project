@@ -1,15 +1,16 @@
-// src/app/cart-card/cart-card.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Product } from '../types/product';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-cart-card',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MatDialogModule],
   templateUrl: './cart-card.component.html',
   styleUrls: ['./cart-card.component.css']
 })
@@ -28,7 +29,15 @@ export class CartCardComponent {
   };
   @Output() removeProduct = new EventEmitter<number>();
 
+  constructor(private dialog: MatDialog) {}
+
   onRemoveProduct() {
-    this.removeProduct.emit(this.product.id);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.removeProduct.emit(this.product.id);
+      }
+    });
   }
 }

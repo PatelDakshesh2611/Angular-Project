@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
   getTotalPrice(): number {
     return this.products.reduce((total, product) => total + (product.price * product.quantity), 0);
   }
-  
+
   onCheckout() {
     this.router.navigate(['/checkout']);
   }

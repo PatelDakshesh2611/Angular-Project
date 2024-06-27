@@ -1,19 +1,27 @@
-<mat-card>
+<div class="signup-container">
+  <mat-card class="signup-card">
     <h2>Signup</h2>
     <form (ngSubmit)="onSignup()">
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
-        <input matInput type="text" [(ngModel)]="name" name="name" required>
+        <input matInput type="text" [(ngModel)]="name" name="name" required #nameInput="ngModel">
+        <mat-error *ngIf="nameInput.errors?.['required']">Name is required</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput type="email" [(ngModel)]="email" name="email" required>
+        <input matInput type="email" [(ngModel)]="email" name="email" required #emailInput="ngModel">
+        <mat-error *ngIf="emailInput.errors?.['required']">Email is required</mat-error>
+        <mat-error *ngIf="emailInput.errors?.['email']">Invalid email format</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput type="password" [(ngModel)]="password" name="password" required>
+        <input matInput type="password" [(ngModel)]="password" name="password" required minlength="6" #passwordInput="ngModel">
+        <mat-error *ngIf="passwordInput.errors?.['required']">Password is required</mat-error>
+        <mat-error *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Signup</button>
-      <!-- <div *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</div> -->
+      <div *ngIf="errorMessage" style="color:red;">{{ errorMessage }}</div>
     </form>
+    <p class="login-link">Already have an account? <a routerLink="/login">Login</a></p>
   </mat-card>
+</div>
